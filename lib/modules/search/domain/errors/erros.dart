@@ -1,4 +1,4 @@
-import 'i_app_exception.dart';
+import 'app_exception_interface.dart';
 
 class AppException extends IFailureWeatherForecast {
   const AppException({
