@@ -1,25 +1,24 @@
-import 'package:waether_forecast_app/modules/search/domain/entities/result_search_weather_forecast.dart';
+import 'package:waether_forecast_app/modules/search/domain/entities/weather_entity.dart';
 import 'package:dartz/dartz.dart';
-import 'package:waether_forecast_app/modules/search/domain/repositories/search_weather_forecast_repository.dart';
-import '../errors/errors.dart';
+import 'package:waether_forecast_app/modules/search/domain/repositories/weather_forecast_repository.dart';
+import '../errors/erros.dart';
+import '../errors/i_app_exception.dart';
 
 abstract class ISearchByText {
-  Future<
-      Either<FailureSearchWeatherForecast,
-          List<ResultSearchWeatherForecast>>> call(String searchText);
+  Future<Either<IFailureWeatherForecast, List<WeatherEntity?>>> call(
+      String cityName);
 }
 
-class SearchByText implements ISearchByText {
-  final ISearchWeatherForecastRepository repository;
+class SearchByTextUseCase implements ISearchByText {
+  final IWeatherRepository repository;
 
-  SearchByText(this.repository);
+  SearchByTextUseCase(this.repository);
   @override
-  Future<
-      Either<FailureSearchWeatherForecast,
-          List<ResultSearchWeatherForecast>>> call(String searchText) async {
-    if (searchText == null || searchText.isEmpty) {
+  Future<Either<IFailureWeatherForecast, List<WeatherEntity?>>> call(
+      String cityName) async {
+    if (cityName.isEmpty) {
       return left(InvalidTextError());
     }
-    return repository.search(searchText);
+    return repository.getWeather(cityName);
   }
 }

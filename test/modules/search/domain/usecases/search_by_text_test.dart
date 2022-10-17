@@ -1,30 +1,28 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:waether_forecast_app/modules/search/domain/entities/result_search_weather_forecast.dart';
-import 'package:waether_forecast_app/modules/search/domain/errors/errors.dart';
-import 'package:waether_forecast_app/modules/search/domain/repositories/search_weather_forecast_repository.dart';
+import 'package:waether_forecast_app/modules/search/domain/entities/weather_entity.dart';
+import 'package:waether_forecast_app/modules/search/domain/errors/i_app_exception.dart';
+import 'package:waether_forecast_app/modules/search/domain/repositories/weather_forecast_repository.dart';
 import 'package:waether_forecast_app/modules/search/domain/usecases/search_by_text.dart';
 import 'package:mockito/mockito.dart';
 
-class SearchWeatherForecastRepositoryMock extends Mock
-    implements ISearchWeatherForecastRepository {}
+class WeatherForecastRepositoryMock extends Mock
+    implements IWeatherForecastRepository {}
 
 void main() {
-  final repository = SearchWeatherForecastRepositoryMock();
-  final usecase = SearchByText(repository);
+  final repository = WeatherForecastRepositoryMock();
+  final usecase = SearchByTextUseCase(repository);
 
-  test('deve retornar umas lista de ResultSearchWeatherForecast ', () async {
-    when(repository.search('douglas'))
-        .thenAnswer((_) async => Right(<ResultSearchWeatherForecast>[]));
+  test('deve retornar umas lista de WeatherEntity ', () async {
+    when(repository.search('Douglas'))
+        .thenAnswer((_) async => Right(<WeatherEntity>[]));
     final result = await usecase('Douglas');
 
-    expect(result, isA<List<ResultSearchWeatherForecast>>());
+    expect(result, isA<List<WeatherEntity>>());
   });
 
   test('deve retornar um InvalidTextError caso o texto seja invalido  ',
       () async {
-    when(repository.search('douglas'))
-        .thenAnswer((_) async => Right(<ResultSearchWeatherForecast>[]));
     var result = await usecase('null');
 
     expect(result.fold(id, id), isA<InvalidTextError>());
