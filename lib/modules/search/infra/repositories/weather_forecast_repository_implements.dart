@@ -4,22 +4,20 @@ import 'package:dartz/dartz.dart';
 import 'package:waether_forecast_app/modules/search/domain/repositories/weather_forecast_repository.dart';
 import '../../domain/errors/erros.dart';
 import '../datasources/i_weather_datasource.dart';
-import '../mappers/weather_mapper.dart';
 
 class WeatherForecastRepository implements IWeatherRepository {
-  final IWeatherDatasource datasource;
+  final IWeatherDatasource _datasource;
 
-  WeatherForecastRepository(this.datasource);
+  WeatherForecastRepository(this._datasource);
 
   @override
   Future<Either<IFailureWeatherForecast, List<WeatherEntity>>> getWeather(
       String cityName) async {
-        List<WeatherMapper> list;
     try {
-      final result = await datasource.getWeather(cityName);
+      final result = await _datasource.getWeather(cityName);
       return Right(result);
     } catch (e) {
-      return left(DataSourceError());
+      return left(DataSourceError('datasource failure'));
     }
   }
 }

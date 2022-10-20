@@ -10,15 +10,16 @@ abstract class ISearchByText {
 }
 
 class SearchByTextUseCase implements ISearchByText {
-  final IWeatherRepository repository;
+  final IWeatherRepository _repository;
 
-  SearchByTextUseCase(this.repository);
+  SearchByTextUseCase(this._repository);
   @override
   Future<Either<IFailureWeatherForecast, List<WeatherEntity?>>> call(
       String cityName) async {
-    if (cityName.isEmpty) {
-      return left(InvalidTextError());
+    if (cityName.trim().isEmpty) {
+      return left(InvalidTextError('City name is empty.'));
     }
-    return repository.getWeather(cityName);
+    final weather = await _repository.getWeather(cityName);
+    return weather;
   }
 }
