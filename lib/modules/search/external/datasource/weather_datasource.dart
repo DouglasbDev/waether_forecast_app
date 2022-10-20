@@ -1,8 +1,8 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:waether_forecast_app/modules/search/domain/entities/weather_entity.dart';
-
-import '../../infra/datasources/i_weather_datasource.dart';
-import '../../infra/mappers/weather_mapper.dart';
+import '../../infra/datasources/weather_datasource_interface.dart';
 
 class WeatherDatasource extends IWeatherDatasource {
   final Dio _dio;
@@ -10,13 +10,17 @@ class WeatherDatasource extends IWeatherDatasource {
   WeatherDatasource(this._dio);
   @override
   Future<List<WeatherEntity>> getWeather(String cityName) async {
-     try {
-    var response = await _dio.get('https://goweather.herokuapp.com/weather/$cityName');
-    print(response);
-  } catch (e) {
-    print(e);
+    final response =
+        await _dio.get('https://goweather.herokuapp.com/weather/$cityName');
+    return response.data;
+    // try {
+    //   final response =
+    //       await _dio.get('https://goweather.herokuapp.com/weather/$cityName');
+
+    //   print(response);
+    // } catch (e) {
+    //   print(e);
+    // }
+    // return [];
   }
-  return [];
-  }
-  
 }
