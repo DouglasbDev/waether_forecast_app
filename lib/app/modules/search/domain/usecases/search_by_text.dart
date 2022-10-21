@@ -5,7 +5,7 @@ import '../errors/erros.dart';
 import '../errors/app_exception_interface.dart';
 
 abstract class ISearchByTextUsecase {
-  Future<Either<IFailureWeatherForecast, WeatherEntity>> call(String cityName);
+  Future<Either<IAppException, WeatherEntity>> call(String cityName);
 }
 
 class SearchByTextUseCase implements ISearchByTextUsecase {
@@ -13,7 +13,7 @@ class SearchByTextUseCase implements ISearchByTextUsecase {
 
   SearchByTextUseCase(this._repository);
   @override
-  Future<Either<IFailureWeatherForecast, WeatherEntity>> call(
+  Future<Either<IAppException, WeatherEntity>> call(
       String cityName) async {
     if (cityName.trim().isEmpty) {
       return left(InvalidTextError('City name is empty.'));

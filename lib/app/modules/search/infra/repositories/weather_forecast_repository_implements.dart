@@ -12,13 +12,13 @@ class WeatherForecastRepository implements IWeatherRepository {
   WeatherForecastRepository(this._datasource);
 
   @override
-  Future<Either<IFailureWeatherForecast, WeatherEntity>> getWeather(
+  Future<Either<IAppException, WeatherEntity>> getWeather(
       String cityName) async {
     try {
       final result = await _datasource.getWeather(cityName);
       final weather = WeatherMapper.fromMap(result);
       return Right(weather);
-    } on IFailureWeatherForecast catch (e) {
+    } on IAppException catch (e) {
       return Left(e);
     }
   }
