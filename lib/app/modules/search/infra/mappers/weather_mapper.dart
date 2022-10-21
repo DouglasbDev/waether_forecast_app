@@ -12,7 +12,7 @@ class WeatherMapper {
   }
 
   static Map<String, dynamic> toMap(WeatherEntity weather) {
-    return <String, dynamic>{
+    return {
       'temperature': weather.temperature,
       'wind': weather.wind,
       'description': weather.description,
