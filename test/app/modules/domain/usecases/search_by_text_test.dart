@@ -12,16 +12,16 @@ void main() {
   final repository = WeatherRepositoryMock();
   final usecase = SearchByTextUseCase(repository);
   var weather = WeatherEntity(
-    description: '17 km/h',
-    temperature: '+30',
-    wind: 'Partly Cloudy',
+    description: "Partly cloudy",
+    temperature: "+29 °C",
+    wind: "26 km/h",
     forecast: [],
   );
 
   test('deve retornar umas lista de WeatherEntity ', () async {
-    when(repository.getWeather('maceió'))
+    when(repository.getWeather('Fortaleza'))
         .thenAnswer((_) async => Right(weather));
-    final result = await usecase('maceió');
+    final result = await usecase('Fortaleza');
 
     expect(result.fold(id, id), isA<List<WeatherEntity>>());
   });
