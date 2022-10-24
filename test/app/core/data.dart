@@ -30,23 +30,23 @@ class GoWeatherResponse {
 
 const _successJson = '''
 {
-  "temperature":"+28 °C",
+  "temperature":"+30 °C",
   "wind":"17 km/h",
   "description":"Partly cloudy",
   "forecast":[
     {
       "day":"1",
-      "temperature":"+28 °C",
-      "wind":"14 km/h"
+      "temperature":"+30 °C",
+      "wind":"17 km/h"
     },
     {
       "day":"2",
-      "temperature":"+29 °C",
+      "temperature":"+30 °C",
       "wind":"19 km/h"
     },
     {
       "day":"3",
-      "temperature":"28 °C",
+      "temperature":"+30 °C",
       "wind":"17 km/h"
     }
   ]
