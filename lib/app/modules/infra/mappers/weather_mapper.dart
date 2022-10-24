@@ -1,13 +1,15 @@
-import '../../domain/entities/forecast_entity.dart';
 import '../../domain/entities/weather_entity.dart';
+import 'forecast_mapper.dart';
 
 class WeatherMapper {
   static WeatherEntity fromMap(Map<String, dynamic> map) {
     return WeatherEntity(
-      temperature: map['temperature'] as String,
-      wind: map['wind'] as String,
-      description: map['description'] as String,
-      forecast: map['forecast'] as List<ForecastEntity>,
+      temperature: map['temperature'],
+      wind: map['wind'],
+      description: map['description'],
+      forecast: List<Map<String, dynamic>>.from(map['forecast'])
+          .map(ForecastMapper.fromMap)
+          .toList(),
     );
   }
 

@@ -1,21 +1,24 @@
 import 'app_exception_interface.dart';
 
 class WeatherFailure extends IAppException {
-  WeatherFailure(super.message, [super.stackTrace]);
+  const WeatherFailure(super.message, [super.stackTrace]);
 }
 
 class InvalidTextError extends WeatherFailure {
-  InvalidTextError(super.message, [super.stackTrace]);
+  const InvalidTextError(super.message, [super.stackTrace]);
 }
 
 class DataSourceError extends WeatherFailure {
-  DataSourceError(super.message, [super.stackTrace]);
+  const DataSourceError(super.message, [super.stackTrace]);
 }
 
+class WeatherNotFoundError extends WeatherFailure {
+  const WeatherNotFoundError(super.message, [super.stackTrace]);
+}
 
 class HttpClientError extends WeatherFailure {
   final int? statusCode;
-   HttpClientError(
+  HttpClientError(
     String message, {
     this.statusCode,
     StackTrace? stackTrace,
