@@ -3,7 +3,7 @@ import 'package:waether_forecast_app/app/modules/domain/entities/weather_entity.
 import 'package:dartz/dartz.dart';
 import 'package:waether_forecast_app/app/modules/domain/repositories/weather_forecast_repository_interface.dart';
 import 'package:waether_forecast_app/app/modules/infra/mappers/weather_mapper.dart';
-import '../../domain/errors/erros.dart';
+
 import '../datasources/weather_datasource_interface.dart';
 
 class WeatherForecastRepository implements IWeatherRepository {

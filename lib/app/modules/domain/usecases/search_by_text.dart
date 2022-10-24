@@ -15,7 +15,7 @@ class SearchByTextUseCase implements ISearchByTextUsecase {
   @override
   Future<Either<IAppException, WeatherEntity>> call(String cityName) async {
     if (cityName.trim().isEmpty) {
-      return left(InvalidTextError('City name is empty.'));
+      return left(const InvalidTextError('City name is empty.'));
     }
     final weather = await _repository.getWeather(cityName);
     return weather;
