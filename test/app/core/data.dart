@@ -5,30 +5,30 @@ import 'package:dio/dio.dart';
 class GoWeatherResponse {
   const GoWeatherResponse._();
 
-  static const successJson = _successJson;
-  static const notFoundJson = _notFoundJson;
-  static const emptyJson = _emptyJson;
+  static const successMap = _successMap;
+  static const notFoundMap = _notFoundMap;
+  static const emptyMap = _emptyMap;
 
   static final successResponse = Response(
     requestOptions: RequestOptions(data: {}, path: ''),
     statusCode: 200,
-    data: jsonDecode(successJson),
+    data: jsonDecode(successMap),
   );
 
   static final notFoundResponse = Response(
     requestOptions: RequestOptions(data: {}, path: ''),
     statusCode: 200,
-    data: jsonDecode(notFoundJson),
+    data: jsonDecode(notFoundMap),
   );
 
   static final emptyResponse = Response(
     requestOptions: RequestOptions(data: {}, path: ''),
     statusCode: 200,
-    data: jsonDecode(emptyJson),
+    data: jsonDecode(emptyMap),
   );
 }
 
-const _successJson = '''
+const _successMap = '''
 {
   "temperature":"+30 °C",
   "wind":"17 km/h",
@@ -53,13 +53,13 @@ const _successJson = '''
 }
 ''';
 
-const _notFoundJson = '''
+const _notFoundMap = '''
 {
   "message": "NOT_FOUND"
 }
 ''';
 
-const _emptyJson = '''
+const _emptyMap = '''
 {
   "temperature":"",
   "wind":"",

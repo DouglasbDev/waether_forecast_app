@@ -18,7 +18,7 @@ void main() {
     wind: "26 km/h",
     forecast: [],
   );
-  const cityname = 'Fortaleza';
+  
 
   test('deve retornar umas lista de WeatherEntity ', () async {
     when(() => repository.getWeather('Fortaleza'))
