@@ -1,24 +1,19 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:waether_forecast_app/app/core/http_clients/dio_client.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:waether_forecast_app/app/core/interfaces/i_http_client.dart';
 import 'package:waether_forecast_app/app/modules/external/datasource/weather_datasource.dart';
 
-import '../../../core/data.dart';
-
-class DioMock extends Mock implements Dio {}
+class DioMock extends Mock implements IHttpClient {}
 
 void main() {
   final dio = DioMock();
-  final client = DioHttpClient(dio);
-  final datasource = WeatherDatasource(client);
-
+  final datasource = WeatherDatasource(dio);
   test('should return a WeatherModel', () async {
-    when(dio.get('maceió')).thenAnswer(
-      (_) async => GoWeatherResponse.successResponse,
+    when(() => dio.get(any())).thenAnswer(
+      (_) async => <String, dynamic>{},
     );
 
-    final result = await datasource.getWeather('maceio');
+    final result = await datasource.getWeather('Fortaleza');
 
     expect(result, isA<Map<String, dynamic>>());
   });
