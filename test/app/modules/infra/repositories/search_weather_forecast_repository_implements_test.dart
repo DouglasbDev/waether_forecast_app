@@ -18,7 +18,7 @@ void main() {
   final jsonResponse = jsonDecode(GoWeatherResponse.successJson);
   test('should return a Weather', () async {
     when(() => datasource.getWeather(any()))
-        .thenAnswer((i) async => jsonResponse);
+        .thenAnswer((_) async => jsonResponse);
 
     final repository = WeatherForecastRepository(datasource);
 
