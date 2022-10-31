@@ -15,17 +15,17 @@ class WeatherDataSourceMock extends Mock implements IWeatherDatasource {}
 
 void main() {
   final datasource = WeatherDataSourceMock();
-  final jsonResponse = jsonDecode(GoWeatherResponse.successJson);
+  final MapResponse = jsonDecode(GoWeatherResponse.successMap);
   test('should return a Weather', () async {
     when(() => datasource.getWeather(any()))
-        .thenAnswer((_) async => jsonResponse);
+        .thenAnswer((_) async => MapResponse);
 
     final repository = WeatherForecastRepository(datasource);
 
     final weather = await repository.getWeather('Fortaleza');
     expect(weather.fold(id, id), isA<WeatherEntity>());
   });
-  test('should return a DatasourceError if datasource fail', () async {
+  test('should return a DataSourceError if datasource fail', () async {
     when(() => datasource.getWeather(any()))
         .thenThrow(const DataSourceError(''));
 
