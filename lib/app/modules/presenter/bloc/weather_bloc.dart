@@ -6,8 +6,9 @@ import '../states/weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final ISearchByTextUsecase usecase;
-  WeatherBloc(super.initialState, this.usecase);
-
+  WeatherBloc(this.usecase) : super(WeatherInitialState()) {
+    on<GetWeatherEvent>(getWeather);
+  }
   Future<void> getWeather(
     GetWeatherEvent event,
     Emitter<WeatherState> emit,

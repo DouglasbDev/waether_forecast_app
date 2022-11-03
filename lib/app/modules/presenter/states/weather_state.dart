@@ -6,6 +6,12 @@ abstract class WeatherState {
   const WeatherState();
 }
 
+class WeatherInitialState extends WeatherState {
+  WeatherInitialState();
+}
+
+class WeatherLoadingState extends WeatherState {}
+
 class ErrorWeatherState extends WeatherState {
   final IAppException error;
 
